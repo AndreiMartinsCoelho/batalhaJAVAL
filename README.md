@@ -7,4 +7,4 @@
 
 ## - OBS: Só terá ganhador quando algum player derrubar todos os barcos do outro!
 
-<img src="![image](https://github.com/AndreiMartinsCoelho/batalhaJAVAL/assets/108534182/722df27f-a5dc-4a84-8997-41a255edf2a8)"/>
+![image](https://github.com/AndreiMartinsCoelho/batalhaJAVAL/assets/108534182/722df27f-a5dc-4a84-8997-41a255edf2a8)

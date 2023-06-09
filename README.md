@@ -1,5 +1,5 @@
 ### - batalhaJAVAL
-## - Batalha Naval em naval usando vetores, matrizes e métodos
+## - Batalha Naval em JAVA usando vetores, matrizes e métodos
 
 ### - Sobre a Batalha Naval:
 

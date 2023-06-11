@@ -3,7 +3,7 @@
 
 ### - Sobre a Batalha Naval:
 
-## - O jogo começa perguntando ao jogador se ele quer jogar contra outro jogador ou contra o pc, é logo depois pergunta se quer alocar os barcos de forma manual ou de forma aleatória (OBS: se for contra o PC ele ira alocar os barcos automaticamente) é assim começa o jogo logo depois de alocar os barco, logo depois de alocar os barcos será realizado a etapa de realizar os tiros na matriz do inimigo, mas lembrando que o PC faz tudo automaticamente.
+## - O jogo começa perguntando ao jogador se ele quer jogar contra outro jogador ou contra o pc, e então o programa pergunta se ele quer alocar os barcos manualmente ou aleatoriamente (OBS: se ele for contra o PC ele irá alocar os barcos automaticamente), é assim que o jogo começa logo após alocar os barcos, logo após alocar os barcos será realizada a etapa de atirar na matriz inimiga, mas lembrando que o PC faz tudo automaticamente.
 
 ## - OBS: Só terá ganhador quando algum jogador derrubar todos os barcos do outro!
 

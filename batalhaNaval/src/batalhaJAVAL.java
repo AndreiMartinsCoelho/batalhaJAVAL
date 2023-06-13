@@ -45,46 +45,6 @@ public class batalhaJAVAL {
         return barcoAlocado;
     }// final do teste
 
-    //Teste para alocar os barcos na matriz 2
-    public static boolean alocaBarco2(char[][] matriz2, int tamanho2, char orientacao2, int pLinha2, int pColuna2) {
-        boolean barcoAlocado2 = false;
-        boolean espacoLivre2 = true;
-        // Verificando se o barco cabe na vertical
-        if (orientacao2 == 'v') {
-            if (pLinha2 >= 0 && pColuna2 >= 0 && pLinha2 + tamanho2 < 10 && pColuna2 < 10) {
-
-                for (int i = pLinha2; i < pLinha2 + tamanho2; i++) {
-                    if (matriz2[i][pColuna2] != '~')
-                        espacoLivre2 = false;
-                }
-                if (espacoLivre2) {
-                    for (int i = pLinha2; i < pLinha2 + tamanho2; i++) {
-                        matriz2[i][pColuna2] = 'N';
-                    }
-                    barcoAlocado2 = true;
-                }
-            }
-
-        }
-        // Verificando se o barco cabe na horizontal
-        if (orientacao2 == 'h') {
-            if (pLinha2 >= 0 && pColuna2 >= 0 && pLinha2 < 10 && pColuna2 + tamanho2 < 10) {
-                for (int i = pColuna2; i < pColuna2 + tamanho2; i++) {
-                    if (matriz2[pLinha2][i] != '~')
-                        espacoLivre2 = false;
-                }
-                if (espacoLivre2) {
-                    for (int i = pColuna2; i < pColuna2 + tamanho2; i++) {
-                        matriz2[pLinha2][i] = 'N';
-                    }
-                    barcoAlocado2 = true;
-                }
-            }
-
-        }
-        return barcoAlocado2;
-    }// final do teste
-
     //Teste que verifica se o tiro acertou ou não
     public static boolean verificarTiro(char[][] matriz, int linha, int coluna) {
         boolean tiroAcertou = false;
@@ -97,6 +57,9 @@ public class batalhaJAVAL {
                 tiroAcertou = true;
             } else if (posicao == '~') {
                 matriz[linha][coluna] = 'O'; // Marcar como tiro na água
+            }
+            else if (posicao == 'X' || posicao == 'O') {
+                System.out.println("Você já atirou nessa posição");
             }
         }
 
@@ -128,32 +91,6 @@ public class batalhaJAVAL {
 
     }//final do teste
 
-    //Teste que imprime a matriz 2 com os barcos alocados
-    public static String imprimeMatriz2(char matriz2[][]) {
-        String retornee = "";
-        // matriz 2 do jogo|mapa 2
-        System.out.println();
-
-        System.out.print("\t");
-        for (char coluna = 'A'; coluna < 'A' + matriz2.length; coluna++) {
-            System.out.print(coluna + " \t");
-        }
-
-        System.out.println();
-
-        for (int l = 0; l < matriz2.length; l++) {
-            retornee += l;
-            for (int c = 0; c < matriz2[0].length; c++) {
-                retornee += "\t" + matriz2[l][c];
-            }
-            retornee += "\n";
-        }
-
-        System.out.println();
-
-        return retornee;
-    }//final do teste
-
     //imprime a primeira matriz com os tiros acertados
     public static String imprimeMatrizComTirosAcertados(char[][] matriz) {
         String retorno = "";
@@ -166,32 +103,6 @@ public class batalhaJAVAL {
 
         for (int i = 0; i < matriz.length; i++) {
             System.out.print(i+ "\t");
-            for (int j = 0; j < matriz.length; j++) {
-                char caractere = matriz[i][j];
-                if (caractere == 'N') {
-                    caractere = '~';
-                }
-                System.out.print(caractere + "\t");
-            }
-            System.out.println();
-        }
-        System.out.println();
-
-        return retorno;
-    }//final do teste
-
-    //imprime um segunda matriz com os tiros acertados
-    public static String imprimeMatrizComTirosAcertados2(char[][] matriz) {
-        String retorno = "";
-
-        System.out.print("\t");
-        for (char coluna = 'A'; coluna < 'A' + matriz.length; coluna++) {
-            System.out.print(coluna + "\t");
-        }
-        System.out.println();
-
-        for (int i = 0; i < matriz.length; i++) {
-            System.out.print(i + 1 + "\t");
             for (int j = 0; j < matriz.length; j++) {
                 char caractere = matriz[i][j];
                 if (caractere == 'N') {
@@ -234,8 +145,6 @@ public class batalhaJAVAL {
         String MODE = "";
         String ALOCAR = "";
         String ALOCARtwo = "";
-        String NICK = "";
-        String NICK2 = "";
 
         // selecionar modo de jogo
         System.out.println("Jogar contra a máquina[PC]!");
@@ -250,9 +159,6 @@ public class batalhaJAVAL {
         System.out.println("Alocar os barcos de forma automática[AUTO] ou manual[MANU]\n");
         switch (MODE.toUpperCase()) {
             case "PC":
-                System.out.println("Digite o seu nick para jogar:\n");
-                NICK = ler.nextLine();
-
                 System.out.println("A máquina alocou os  barcos automaticamente\n");
                 jogoMaquinaAuto2(mapaOne);
                 System.out.println(imprimeMatriz(mapaOne));
@@ -264,15 +170,15 @@ public class batalhaJAVAL {
 
                 switch (ALOCARtwo.toUpperCase()) {
                     case "AUTO":
-                        System.out.println("O player " + NICK.toUpperCase() + " alocou os barcos automaticamente\n");
+                        System.out.println("O player alocou os barcos automaticamente\n");
                         jogoMaquinaAuto1(mapaTwo);
-                        System.out.println(imprimeMatriz2(mapaTwo));
+                        System.out.println(imprimeMatriz(mapaTwo));
                         break;
 
                     case "MANU":
                         jogoManual2(mapaTwo);
-                        System.out.println(imprimeMatriz2(mapaTwo));
-                        System.out.println("O player " + NICK + " alocou os barcos manualmente \n");
+                        System.out.println(imprimeMatriz(mapaTwo));
+                        System.out.println("O player alocou os barcos manualmente \n");
                         break;
 
                     default:
@@ -283,17 +189,12 @@ public class batalhaJAVAL {
             //iniciando o jogo
             realizarTiroAutomatizado(mapaOne, mapaTwo);
             System.out.println(imprimeMatrizComTirosAcertados(mapaTwo));
-            System.out.println(imprimeMatrizComTirosAcertados2(mapaOne));
+            System.out.println(imprimeMatrizComTirosAcertados(mapaOne));
 
             break;
             
             //modo player
             case "P":
-                System.out.println("Digite o nick do primeiro jogador:\n");
-                NICK = ler.nextLine();
-                System.out.println("Digite o seu nick do segundo jogador:\n");
-                NICK2 = ler.nextLine();
-
                 System.out.println("Selecione como deseja alocar os barcos[PLAYER-1]:\n");
                 ALOCAR = ler.nextLine();
 
@@ -304,13 +205,13 @@ public class batalhaJAVAL {
 
                 switch (ALOCAR.toUpperCase()) {
                     case "AUTO":
-                        System.out.println("O player-1 " + NICK.toUpperCase() + " alocou os  barcos automaticamente \n");
+                        System.out.println("O player-1  alocou os  barcos automaticamente \n");
                         jogoMaquinaAuto1(mapaOne);
                         System.out.println(imprimeMatriz(mapaOne));
                         break;
 
                     case "MANU":
-                        System.out.println("O player-1 " + NICK.toUpperCase() + " alocou os barcos manualmente \n");
+                        System.out.println("O player-1 alocou os barcos manualmente \n");
                         jogoManual1(mapaOne);
                         System.out.println(imprimeMatriz(mapaOne));
                         break;
@@ -324,15 +225,15 @@ public class batalhaJAVAL {
 
                 switch( ALOCARtwo.toUpperCase() ) {
                     case "AUTO":
-                        System.out.println("O player-2 " + NICK2.toUpperCase() + " alocou os barcos automaticamente \n");
+                        System.out.println("O player-2 alocou os barcos automaticamente \n");
                         jogoMaquinaAuto2(mapaTwo);
-                        System.out.println(imprimeMatriz2(mapaTwo));
+                        System.out.println(imprimeMatriz(mapaTwo));
                     break;
 
                     case "MANU":
-                        System.out.println("O player-2 " + NICK2.toUpperCase() + " alocou os barcos manualmente \n");
+                        System.out.println("O player-2 alocou os barcos manualmente \n");
                         jogoManual2(mapaTwo);
-                        System.out.println(imprimeMatriz2(mapaTwo));
+                        System.out.println(imprimeMatriz(mapaTwo));
                     break;
 
                     default:
@@ -349,7 +250,7 @@ public class batalhaJAVAL {
             }//final do switch
     }// final do main
 
-    // metodo para jogar os barcos automaticamente
+    // metodo para jogar os barcos automaticamente para o player-1
     public static void jogoMaquinaAuto2(char mapaOne[][]) {
         Random aleatorio = new Random();
         int quantBarcos = 1;
@@ -382,7 +283,7 @@ public class batalhaJAVAL {
 
     }// final do teste
 
-    //metodo para jogar contra a maquina
+    //metodo para alocar os barcos no mapa do player-2 automaticamente
     public static void jogoMaquinaAuto1(char mapaTwo[][]) {
 
         //Alaoca os barcos no mapaTwo
@@ -403,7 +304,7 @@ public class batalhaJAVAL {
                 } else {
                     orientacao2 = 'h';
                 }
-                alocado2 = alocaBarco2(mapaTwo, tamanhoBarco2, orientacao2, linha2, coluna2);
+                alocado2 = alocaBarco(mapaTwo, tamanhoBarco2, orientacao2, linha2, coluna2);
                 System.out.println(alocado2);
                 // }//Fim aloca barco
                 if (alocado2) {
@@ -484,7 +385,7 @@ public class batalhaJAVAL {
                     orientacao2 = 'h';
                 }
 
-                alocado2 = alocaBarco2(mapaTwo, tamanhoBarco2, orientacao2, linha2, coluna2);
+                alocado2 = alocaBarco(mapaTwo, tamanhoBarco2, orientacao2, linha2, coluna2);
                 System.out.println(alocado2);
                 if (alocado2) {
                     quantBarcosTipo2++;
@@ -580,7 +481,8 @@ public class batalhaJAVAL {
                 System.out.println("O jogador 1 acertou um navio!");
                 tirosAcertadosJogador++;
             }else{
-                System.out.println("O jogador 1 errou o tiro!");
+                System.out.println("O jogador 1 acertou na água!");
+                
                 System.out.println("Vez do Jogador 2");
             }
 
@@ -603,9 +505,10 @@ public class batalhaJAVAL {
                 System.out.println("Jogador 2 acertou um navio!");
                 tirosAcertadosJogador2++;
             } else {
-                System.out.println("Jogador 2 errou o tiro!");
+                System.out.println("Jogador 2 acertou na água!");
             }
 
+            //imprime o mapa com os tiros acertados
             imprimeMatrizComTirosAcertados(mapaOne);
 
             System.out.println("Tiros acertados pelo jogador 2: " + tirosAcertadosJogador2);
@@ -621,6 +524,5 @@ public class batalhaJAVAL {
         }
 
     }//final do teste.
-
 
 }//final public class

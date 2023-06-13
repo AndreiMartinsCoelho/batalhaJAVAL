@@ -242,9 +242,9 @@ public class batalhaJAVAL {
                 }
 
                 //iniciando o jogo
-                    realizarTiroAutomatizado(mapaOne, mapaTwo);
+                    realizarTiroJJ(mapaOne, mapaTwo);
                     System.out.println(imprimeMatrizComTirosAcertados(mapaTwo));
-                     System.out.println(imprimeMatrizComTirosAcertados(mapaOne));
+                    System.out.println(imprimeMatrizComTirosAcertados(mapaOne));
 
                 break;
 

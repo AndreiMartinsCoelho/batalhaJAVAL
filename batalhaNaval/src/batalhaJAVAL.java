@@ -1,6 +1,4 @@
-
 import java.util.Scanner;
-
 import java.util.Random;
 
 public class batalhaJAVAL {
@@ -45,69 +43,8 @@ public class batalhaJAVAL {
         return barcoAlocado;
     }// final do teste
 
-    // aloca os barcos na matriz manualmente com letras
-    public static boolean alocaBarcoManu(char[][] matriz, int tamanho, char orientacao, int pLinha, char pColuna) {
-        boolean barcoAlocado = false;
-        boolean espacoLivre = true;
-
-        // Verificando se o barco cabe na vertical
-        if (orientacao == 'v') {
-            if (pLinha >= 0 && pColuna >= 0 && pLinha + tamanho < 10 && pColuna < 10) {
-
-                for (int i = pLinha; i < pLinha + tamanho; i++) {
-                    if (matriz[i][pColuna] != '~')
-                        espacoLivre = false;
-                }
-                if (espacoLivre) {
-                    for (int i = pLinha; i < pLinha + tamanho; i++) {
-                        matriz[i][pColuna - 'a'] = 'N';
-                    }
-                    barcoAlocado = true;
-                }
-            }
-
-        }
-        // Verificando se o barco cabe na horizontal
-        if (orientacao == 'h') {
-            if (pLinha >= 0 && pColuna >= 0 && pLinha < 10 && pColuna + tamanho < 10) {
-                for (int i = pColuna; i < pColuna + tamanho; i++) {
-                    if (matriz[pLinha][i] != '~')
-                        espacoLivre = false;
-                }
-                if (espacoLivre) {
-                    for (int i = pColuna; i < pColuna + tamanho; i++) {
-                        matriz[pLinha][i] = 'N';
-                    }
-                    barcoAlocado = true;
-                }
-            }
-
-        }
-        return barcoAlocado;
-    }// final do teste
-
     // Teste que verifica se o tiro acertou ou não
     public static boolean verificarTiro(char[][] matriz, int linha, int coluna) {
-        boolean tiroAcertou = false;
-
-        // se o tiro estiver dentro da matriz
-        if (linha >= 0 && linha < matriz.length && coluna >= 0 && coluna < matriz.length) {
-            char posicao = matriz[linha][coluna];
-            if (posicao == 'N') {
-                matriz[linha][coluna] = 'X'; // Marcar como tiro certo
-                tiroAcertou = true;
-            } else if (posicao == '~') {
-                matriz[linha][coluna] = 'O'; // Marcar como tiro na água
-            } else if (posicao == 'X' || posicao == 'O') {
-                System.out.println("Você já atirou nessa posição");
-            }
-        }
-
-        return tiroAcertou;
-    }// final do teste
-
-    // Teste que verifica se o tiro acertou ou não(Versao com letras)
-    public static boolean verificarTiroManu(char[][] matriz, int linha, char coluna) {
         boolean tiroAcertou = false;
 
         // se o tiro estiver dentro da matriz
@@ -407,47 +344,8 @@ public class batalhaJAVAL {
                 System.out.println("Digite um valor para alocar a posição C: ");
                 colunaLetra = ler1.nextLine().charAt(0);
 
-                switch (colunaLetra) {
-                    case 'A':
-                        colunaLetra = 0;
-                        break;
-
-                    case 'B':
-                        colunaLetra = 1;
-                        break;
-
-                    case 'C':
-                        colunaLetra = 2;
-                        break;
-
-                    case 'D':
-                        colunaLetra = 3;
-                        break;
-
-                    case 'E':
-                        colunaLetra = 4;
-                        break;
-
-                    case 'F':
-                        colunaLetra = 5;
-                        break;
-
-                    case 'G':
-                        colunaLetra = 6;
-                        break;
-
-                    case 'H':
-                        colunaLetra = 7;
-                        break;
-
-                    case 'I':
-                        colunaLetra = 8;
-                        break;
-
-                    case 'J':
-                        colunaLetra = 9;
-                        break;
-                }
+                // converte a letra para numero
+                int colunaInt = colunaLetra - 'A';
 
                 char orientacao;
                 System.out.println("Digite a orientação (v/h): ");
@@ -458,7 +356,7 @@ public class batalhaJAVAL {
                     orientacao = 'h';
                 }
 
-                alocado = alocaBarcoManu(mapaOne, tamanhoBarco, orientacao, linha, colunaLetra);
+                alocado = alocaBarco(mapaOne, tamanhoBarco, orientacao, linha, colunaInt);
                 System.out.println(alocado);
                 if (alocado) {
                     quantBarcosTipo++;
@@ -490,47 +388,8 @@ public class batalhaJAVAL {
                 System.out.println("Digite um valor para alocar a posição C: ");
                 char coluna2 = ler2.nextLine().toUpperCase().charAt(0);
 
-                switch (coluna2) {
-                    case 'A':
-                        coluna2 = 0;
-                        break;
-
-                    case 'B':
-                        coluna2 = 1;
-                        break;
-
-                    case 'C':
-                        coluna2 = 2;
-                        break;
-
-                    case 'D':
-                        coluna2 = 3;
-                        break;
-
-                    case 'E':
-                        coluna2 = 4;
-                        break;
-
-                    case 'F':
-                        coluna2 = 5;
-                        break;
-
-                    case 'G':
-                        coluna2 = 6;
-                        break;
-
-                    case 'H':
-                        coluna2 = 7;
-                        break;
-
-                    case 'I':
-                        coluna2 = 8;
-                        break;
-
-                    case 'J':
-                        coluna2 = 9;
-                        break;
-                }
+                // converte a letra para numero
+                int coluna2Int = coluna2 - 'A';
 
                 char orientacao2;
                 System.out.println("Digite a orientação (v/h): ");
@@ -541,7 +400,7 @@ public class batalhaJAVAL {
                     orientacao2 = 'h';
                 }
 
-                alocado2 = alocaBarcoManu(mapaTwo, tamanhoBarco2, orientacao2, linha2, coluna2);
+                alocado2 = alocaBarco(mapaTwo, tamanhoBarco2, orientacao2, linha2, coluna2Int);
                 System.out.println(alocado2);
                 if (alocado2) {
                     quantBarcosTipo2++;
@@ -558,103 +417,70 @@ public class batalhaJAVAL {
         int tirosAcertadosMaquina = 0;
         int tirosAcertadosJogador = 0;
         int totalTiros = 20;
+        boolean rodada = true;
 
-        // finaliza até quando todos um dos jogadores acertarem todos os tiros nos
-        // navios
         while (tirosAcertadosMaquina < totalTiros && tirosAcertadosJogador < totalTiros) {
-            // Vez da máquina
-            System.out.println("Vez da Máquina");
-            int linhaTiroMaquina = random.nextInt(mapaTwo.length);
-            int colunaTiroMaquina = random.nextInt(mapaTwo.length);
+            if (rodada) {
+                // Vez da máquina
+                System.out.println("Vez da Máquina");
+                int linhaTiroMaquina = random.nextInt(mapaTwo.length);
+                int colunaTiroMaquina = random.nextInt(mapaTwo[0].length);
 
-            boolean tiroAcertouMaquina = verificarTiro(mapaTwo, linhaTiroMaquina, colunaTiroMaquina);
-            if (tiroAcertouMaquina) {
-                System.out.println("A máquina acertou um navio!");
-                tirosAcertadosMaquina++;
+                boolean tiroAcertouMaquina = verificarTiro(mapaTwo, linhaTiroMaquina, colunaTiroMaquina);
+                if (tiroAcertouMaquina) {
+                    System.out.println("A máquina acertou um navio!");
+                    tirosAcertadosMaquina++;
+                } else {
+                    System.out.println("A máquina errou o tiro!");
+                }
+
+                imprimeMatrizComTirosAcertados(mapaTwo);
+
+                if (tirosAcertadosMaquina == totalTiros) {
+                    break; // Sai do loop caso a máquina vença
+                }
             } else {
-                System.out.println("A máquina errou o tiro!");
+                // Vez do jogador
+                System.out.println("Vez do Jogador");
+                Scanner ler = new Scanner(System.in);
+
+                System.out.println("Digite a linha para realizar o tiro: ");
+                int linhaTiroJogador = ler.nextInt();
+                ler.nextLine();
+
+                System.out.println("Digite a coluna para realizar o tiro: ");
+                char colunaTiroJogador = ler.nextLine().toUpperCase().charAt(0);
+
+                // Converte a letra da coluna um número
+                int colunaTiroJogadorInt = colunaTiroJogador - 'A';
+
+                boolean tiroAcertouJogador = verificarTiro(mapaOne, linhaTiroJogador, colunaTiroJogadorInt);
+                if (tiroAcertouJogador) {
+                    System.out.println("Jogador acertou um navio!");
+                    tirosAcertadosJogador++;
+                } else {
+                    System.out.println("Jogador errou o tiro!");
+                }
+
+                imprimeMatrizComTirosAcertados(mapaOne);
+
+                if (tirosAcertadosJogador == totalTiros) {
+                    break; // Sai do loop caso o jogador vença
+                }
             }
 
-            imprimeMatrizComTirosAcertados(mapaTwo);
-
-            // Vez do jogador
-            System.out.println("Vez do Jogador");
-            Scanner ler = new Scanner(System.in);
-
-            System.out.println("Digite a linha para realizar o tiro: ");
-            int linhaTiroJogador = ler.nextInt();
-
-            ler.nextLine();
-
-            System.out.println("Digite a coluna para realizar o tiro: ");
-            char colunaTiroJogador = ler.nextLine().toUpperCase().charAt(0);
-
-            switch (colunaTiroJogador) {
-                case 'A':
-                    colunaTiroJogador = 0;
-                    break;
-
-                case 'B':
-                    colunaTiroJogador = 1;
-                    break;
-
-                case 'C':
-                    colunaTiroJogador = 2;
-                    break;
-
-                case 'D':
-                    colunaTiroJogador = 3;
-                    break;
-
-                case 'E':
-                    colunaTiroJogador = 4;
-                    break;
-
-                case 'F':
-                    colunaTiroJogador = 5;
-                    break;
-
-                case 'G':
-                    colunaTiroJogador = 6;
-                    break;
-
-                case 'H':
-                    colunaTiroJogador = 7;
-                    break;
-
-                case 'I':
-                    colunaTiroJogador = 8;
-                    break;
-
-                case 'J':
-                    colunaTiroJogador = 9;
-                    break;
-            }
-
-            boolean tiroAcertouJogador = verificarTiroManu(mapaOne, linhaTiroJogador, colunaTiroJogador);
-            if (tiroAcertouJogador) {
-                System.out.println("Jogador acertou um navio!");
-                tirosAcertadosJogador++;
-            } else {
-                System.out.println("Jogador errou o tiro!");
-            }
-
-            imprimeMatrizComTirosAcertados(mapaOne);
-
-            System.out.println("Tiros acertados pela máquina: " + tirosAcertadosMaquina);
-            System.out.println("Tiros acertados pelo jogador: " + tirosAcertadosJogador);
+            rodada = !rodada; // Alterna a vez entre a máquina e o jogador
         }
 
         System.out.println("Fim do jogo!");
 
-        // verifica se o jogador 1 acertou todos os tiros
         if (tirosAcertadosJogador == totalTiros) {
             System.out.println("O jogador venceu!");
         } else {
-            System.out.println("A maquina venceu!");
+            System.out.println("A máquina venceu!");
         }
-
-    }// final do teste.
+    }
+    // Final do teste
 
     // Inicia o jogo de jogador Vs jogador
     public static void realizarTiroJJ(char[][] mapaOne, char[][] mapaTwo) {
@@ -672,145 +498,69 @@ public class batalhaJAVAL {
                 System.out.println("Vez do Jogador 1");
                 System.out.println("Digite a linha para realizar o tiro: ");
                 int linhaTiroJogador = ler.nextInt();
-
                 ler.nextLine();
 
                 System.out.println("Digite a coluna para realizar o tiro: ");
                 char colunaTiroJogador = ler.next().toUpperCase().charAt(0);
 
-                // converte a coluna para o número correspondente
-                switch (colunaTiroJogador) {
-                    case 'A':
-                        colunaTiroJogador = 0;
-                        break;
+                // converte a coluna para um número
+                int colunaTiroJogadorInt = colunaTiroJogador - 'A';
 
-                    case 'B':
-                        colunaTiroJogador = 1;
-                        break;
-
-                    case 'C':
-                        colunaTiroJogador = 2;
-                        break;
-
-                    case 'D':
-                        colunaTiroJogador = 3;
-                        break;
-
-                    case 'E':
-                        colunaTiroJogador = 4;
-                        break;
-
-                    case 'F':
-                        colunaTiroJogador = 5;
-                        break;
-
-                    case 'G':
-                        colunaTiroJogador = 6;
-                        break;
-
-                    case 'H':
-                        colunaTiroJogador = 7;
-                        break;
-
-                    case 'I':
-                        colunaTiroJogador = 8;
-                        break;
-
-                    case 'J':
-                        colunaTiroJogador = 9;
-                        break;
-                }
-
-                // acerte o tiro e continue jogando e se não acertar passe a vez para o outro
-
-                boolean tiroAcertouJogador = verificarTiroManu(mapaTwo, linhaTiroJogador, colunaTiroJogador);
+                // acerte o tiro e continue jogando e se não acertar, passe a vez para o outro
+                // jogador
+                boolean tiroAcertouJogador = verificarTiro(mapaTwo, linhaTiroJogador, colunaTiroJogadorInt);
                 if (tiroAcertouJogador) {
                     System.out.println("O jogador 1 acertou um navio!");
                     tirosAcertadosJogador++;
                 } else {
                     System.out.println("O jogador 1 acertou na água!\n");
-                    System.out.println("Vez do Jogador 2\n");
                     rodada = false;
                 }
 
                 // imprime o mapa com os tiros acertados
                 imprimeMatrizComTirosAcertados(mapaTwo);
 
-                // vez do jogador 2
+                // verifica se o jogador 1 acertou todos os tiros
+                if (tirosAcertadosJogador == totalTiros) {
+                    break; // Sai do loop caso o jogador 1 vença
+                }
+            } else {
+                // Vez do jogador 2
                 System.out.println("Vez do Jogador 2");
                 System.out.println("Digite a linha para realizar o tiro: ");
                 int linhaTiroJogador2 = ler.nextInt();
-
                 ler.nextLine();
 
                 System.out.println("Digite a coluna para realizar o tiro: ");
                 char colunaTiroJogador2 = ler.nextLine().toUpperCase().charAt(0);
 
-                // converte a coluna para o número correspondente
-                switch (colunaTiroJogador2) {
-                    case 'A':
-                        colunaTiroJogador2 = 0;
-                        break;
+                // converte a coluna para o número inteiro
+                int colunaTiroJogador2Int = colunaTiroJogador2 - 'A';
 
-                    case 'B':
-                        colunaTiroJogador2 = 1;
-                        break;
-
-                    case 'C':
-                        colunaTiroJogador2 = 2;
-                        break;
-
-                    case 'D':
-                        colunaTiroJogador2 = 3;
-                        break;
-
-                    case 'E':
-                        colunaTiroJogador2 = 4;
-                        break;
-
-                    case 'F':
-                        colunaTiroJogador2 = 5;
-                        break;
-
-                    case 'G':
-                        colunaTiroJogador2 = 6;
-                        break;
-
-                    case 'H':
-                        colunaTiroJogador2 = 7;
-                        break;
-
-                    case 'I':
-                        colunaTiroJogador2 = 8;
-                        break;
-
-                    case 'J':
-                        colunaTiroJogador2 = 9;
-                        break;
-                }
-
-                // acerte o tiro e continue jogando e se não acertar passe a vez para o outro jogador
-                boolean tiroAcertouJogador2 = verificarTiro(mapaOne, linhaTiroJogador2, colunaTiroJogador2);
-                // acerte o tiro e continue jogando e se não acertar passe a vez para o outro jogador
+                // acerte o tiro e continue jogando e se não acertar, passe a vez para o outro
+                // jogador
+                boolean tiroAcertouJogador2 = verificarTiro(mapaOne, linhaTiroJogador2, colunaTiroJogador2Int);
                 if (tiroAcertouJogador2) {
                     System.out.println("Jogador 2 acertou um navio!");
                     tirosAcertadosJogador2++;
                 } else {
                     System.out.println("Jogador 2 acertou na água!");
-                    System.out.println("Vez do Jogador 1");
                     rodada = true;
                 }
 
                 // imprime o mapa com os tiros acertados
                 imprimeMatrizComTirosAcertados(mapaOne);
 
-                System.out.println("Tiros acertados pelo jogador 2: " +tirosAcertadosJogador2);
-                System.out.println("Tiros acertados pelo jogador 1: " +tirosAcertadosJogador);
+                // verifica se o jogador 2 acertou todos os tiros
+                if (tirosAcertadosJogador2 == totalTiros) {
+                    break; // Sai do loop caso o jogador 2 vença
+                }
             }
         }
+
         System.out.println("Fim do jogo!");
 
-        // verifica se o jogador 1 acertou todos os tiros
+        // verifica quem venceu o jogo
         if (tirosAcertadosJogador == totalTiros) {
             System.out.println("O jogador 1 venceu!");
         } else {

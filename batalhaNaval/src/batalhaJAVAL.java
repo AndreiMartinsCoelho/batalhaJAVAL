@@ -38,7 +38,6 @@ public class batalhaJAVAL {
                     barcoAlocado = true;
                 }
             }
-
         }
         return barcoAlocado;
     }// final do teste
@@ -432,6 +431,7 @@ public class batalhaJAVAL {
                     tirosAcertadosMaquina++;
                 } else {
                     System.out.println("A máquina errou o tiro!");
+                    rodada = false;
                 }
 
                 imprimeMatrizComTirosAcertados(mapaTwo);
@@ -439,6 +439,7 @@ public class batalhaJAVAL {
                 if (tirosAcertadosMaquina == totalTiros) {
                     break; // Sai do loop caso a máquina vença
                 }
+
             } else {
                 // Vez do jogador
                 System.out.println("Vez do Jogador");
@@ -460,6 +461,7 @@ public class batalhaJAVAL {
                     tirosAcertadosJogador++;
                 } else {
                     System.out.println("Jogador errou o tiro!");
+                    rodada = true;
                 }
 
                 imprimeMatrizComTirosAcertados(mapaOne);
@@ -469,7 +471,6 @@ public class batalhaJAVAL {
                 }
             }
 
-            rodada = !rodada; // Alterna a vez entre a máquina e o jogador
         }
 
         System.out.println("Fim do jogo!");
@@ -490,8 +491,7 @@ public class batalhaJAVAL {
         int totalTiros = 20;
         boolean rodada = true;
 
-        // finaliza até quando todos um dos jogadores acertarem todos os tiros nos
-        // navios
+        // finaliza até quando todos um dos jogadores acertarem todos os tiros nos navios
         while (tirosAcertadosJogador2 < totalTiros && tirosAcertadosJogador < totalTiros) {
             if (rodada) {
                 // Vez do jogador 1
@@ -506,8 +506,7 @@ public class batalhaJAVAL {
                 // converte a coluna para um número
                 int colunaTiroJogadorInt = colunaTiroJogador - 'A';
 
-                // acerte o tiro e continue jogando e se não acertar, passe a vez para o outro
-                // jogador
+                // acerte o tiro e continue jogando e se não acertar, passe a vez para o outro jogador
                 boolean tiroAcertouJogador = verificarTiro(mapaTwo, linhaTiroJogador, colunaTiroJogadorInt);
                 if (tiroAcertouJogador) {
                     System.out.println("O jogador 1 acertou um navio!");
@@ -537,8 +536,7 @@ public class batalhaJAVAL {
                 // converte a coluna para o número inteiro
                 int colunaTiroJogador2Int = colunaTiroJogador2 - 'A';
 
-                // acerte o tiro e continue jogando e se não acertar, passe a vez para o outro
-                // jogador
+                // acerte o tiro e continue jogando e se não acertar, passe a vez para o outro jogador
                 boolean tiroAcertouJogador2 = verificarTiro(mapaOne, linhaTiroJogador2, colunaTiroJogador2Int);
                 if (tiroAcertouJogador2) {
                     System.out.println("Jogador 2 acertou um navio!");
